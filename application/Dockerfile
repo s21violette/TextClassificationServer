@@ -1,6 +1,6 @@
 FROM python:3.11.4
 
-COPY .. /root
+COPY . /root
 
 WORKDIR /root
 

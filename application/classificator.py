@@ -3,6 +3,7 @@ import torch
 
 
 # Модель сохраняется в файл
+
 # tokenizer = AutoTokenizer.from_pretrained("google-bert/bert-base-multilingual-cased")
 # model = AutoModelForSequenceClassification.from_pretrained("google-bert/bert-base-multilingual-cased")
 #
@@ -24,20 +25,3 @@ class SentimentClassificator:
         predicted_class = torch.argmax(scores)
 
         return answers[predicted_class]
-
-
-# import ssl
-#
-# from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-# # !pip install vader-multi
-#
-#
-# def predict_sentiment(txt):
-#     ssl._create_default_https_context = ssl._create_unverified_context
-#
-#     analyzer = SentimentIntensityAnalyzer()
-#
-#     res = analyzer.polarity_scores(txt)
-#     # print(res)
-#     # print(max(res, key=res.get))
-#     return max(res, key=res.get)
