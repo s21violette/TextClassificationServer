@@ -15,12 +15,11 @@ model = SentimentClassificator()
 
 
 class MyForm(FlaskForm):
-    text = StringField('name', validators=[DataRequired()])
+    text = StringField('Enter the text', validators=[DataRequired()])
 
 
 @app.route('/')
 def hello_world():
-    # return '<img src="/static/sad.jpg" alt="sad.jpg"'
     form = MyForm()
     if form.validate_on_submit():
         return "Form submitted"
@@ -28,10 +27,15 @@ def hello_world():
 
 
 @app.route('/submit', methods=['POST', 'GET'])
-def post_request_processing():
+def submit():
     try:
         result = model.predict_sentiment(request.form['text'])
-        return result
+        if result == "Negative sentiment":
+            image = "static/negative.png"
+        else:
+            image = "static/positive.png"
+
+        return render_template("response.html", result=result, image=image)
     except KeyError:
         return redirect(url_for('bad_request'))
 
